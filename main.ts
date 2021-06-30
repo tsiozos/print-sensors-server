@@ -1,10 +1,11 @@
 //initialization
 let stations: Array<number>
-
+let lastsync: Array<number>
 
 radio.setGroup(1)
 radio.setTransmitPower(7)
 
+radio.sendValue("SYNC",input.runningTime()/100)
 radio.sendValue("WAKE", 0)
 
 function printStations() {
@@ -21,6 +22,9 @@ radio.onReceivedValue(function (name: string, value: number) {
     if (name === "STATION") {
         stations.insertAt(0, value)
         printStations()
+    }
+    if (name === "SYNCACK") {
+        //for 
     }
 })
 
