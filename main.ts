@@ -21,10 +21,13 @@ control.setInterval(function () {
 radio.onReceivedValue(function (name: string, value: number) {
     if (name === "STATION") {
         stations.insertAt(0, value)
+        lastsync.insertAt(0, 0)
         printStations()
     }
     if (name === "SYNCACK") {
-        //for 
+        for (let i=0; i<stations.length; i++)
+            if (stations[i] == value)
+                lastsync[i] = input.runningTime()/100
     }
 })
 
